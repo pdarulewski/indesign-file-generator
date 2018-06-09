@@ -2,6 +2,7 @@ from pprint import pprint
 import traceback
 import logging
 import os
+import win32com.client as client
 
 FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -29,8 +30,7 @@ class FileGenerator:
 
     def generate_indd_files(self, data, month):
         try:
-            import win32com.client
-            app = win32com.client.Dispatch('InDesign.Application.CC.2018')
+            app = client.Dispatch('InDesign.Application.CC.2018')
             for filename, fileformat in zip(self.__filenames, self.__fileformats):
                 self.__generate_indd_file(filename, fileformat, month, app)
             logger.warning('%s', 'All indd files was generated.')
