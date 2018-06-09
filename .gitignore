@@ -1,3 +1,11 @@
+# Visual Studio Code
+.vscode/
+
+# Artefacts
+Schedules/*.txt
+Data/*.json
+*.xlsx
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
