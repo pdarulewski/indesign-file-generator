@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 import os
+import sys
 from pprint import pprint
 import json
 import re
@@ -35,6 +36,7 @@ class Parser:
         except Exception:
             print("File was not read.")
             traceback.print_exc()
+            sys.exit()
 
         self.__full_data['cities'] = []
         counter = 0
@@ -49,6 +51,7 @@ class Parser:
                         if prop == 2:
                             formats = []
                             pattern = re.compile(r'fb|[A-Z][0-9]|[a-z][0-9]')
+                            pprint(cell)
                             for shape in re.findall(pattern, cell.value):
                                 formats.append(shape)
                             rows[self.__col_names[prop]] = formats
@@ -67,6 +70,7 @@ class Parser:
         except Exception:
             print("Data was not parsed.")
             traceback.print_exc()
+            sys.exit()
 
     def write_to_json(self, outfile):
         pattern = re.compile(r'.*(?=\.)')
@@ -82,4 +86,5 @@ class Parser:
         except Exception:
             print("Data was not parsed.")
             traceback.print_exc()
+            sys.exit()
 

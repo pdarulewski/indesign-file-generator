@@ -1,4 +1,5 @@
 from pprint import pprint
+import sys
 import traceback
 import logging
 import os
@@ -34,11 +35,10 @@ class FileGenerator:
             for filename, fileformat in zip(self.__filenames, self.__fileformats):
                 self.__generate_indd_file(filename, fileformat, month, app)
             logger.warning('%s', 'All indd files was generated.')
-            print(self.__filenames)
-            pprint(self.__fileformats)
         except Exception:
             print("An error occurred while generating indd files.")
             traceback.print_exc()
+            sys.exit()
 
     def __generate_indd_file(self, filename, fileformat, month, app):
         idPortrait = 1751738216
@@ -81,7 +81,7 @@ class FileGenerator:
         except Exception as e:
             print(e)
         try:
-            myFile = r'C:\Users\ray3n\Desktop\Grafika\Bajka\Script' + '\\' + month
+            myFile = r'C:\Users\ray3n\Desktop' + '\\' + month
             if not os.path.exists(myFile):
                 os.makedirs(myFile)
             myFile = myFile + '\\' + filename
