@@ -6,7 +6,6 @@ import json
 import re
 import traceback
 import logging
-import pathlib
 
 FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(format=FORMAT)

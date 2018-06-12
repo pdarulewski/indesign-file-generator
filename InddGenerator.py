@@ -7,40 +7,32 @@ import win32com.client as client
 
 FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(format=FORMAT)
-logger = logging.getLogger('file_generator')
+logger = logging.getLogger('indd_generator')
 
-class FileGenerator:
+class InddGenerator:
     __filenames = []
     __fileformats= []
+    __data = None
+    __destination = None
+    __month = None
 
-    def __init__(self):
-        pass
+    def __init__(self, data, destination, month):
+        self.__data = data
+        self.__destination = destination
+        self.__month = month
 
-    def generate_schedules(self, data):
-        for city in data['cities']:
-            content = ""
-            for event in city['events']:
-                content += event['date'] + "_" + event['title'] + u'\r\n'
-            try:
-                with open("Schedules\\" + city['city'] + '.txt', 'wb') as out:
-                    out.write(content.encode('utf8'))
-                    logger.warning('%s', 'Schedule was generated for: ' + city['city'])
-            except Exception:
-                print("File was not written.")
-                traceback.print_exc()
-
-    def generate_indd_files(self, data, month):
+    def generate_indd_files(self):
         try:
             app = client.Dispatch('InDesign.Application.CC.2018')
             for filename, fileformat in zip(self.__filenames, self.__fileformats):
-                self.__generate_indd_file(filename, fileformat, month, app)
+                self.__generate_indd_file(filename, fileformat, app)
             logger.warning('%s', 'All indd files was generated.')
         except Exception:
             print("An error occurred while generating indd files.")
             traceback.print_exc()
             sys.exit()
 
-    def __generate_indd_file(self, filename, fileformat, month, app):
+    def __generate_indd_file(self, filename, fileformat, app):
         idPortrait = 1751738216
         myDocument = app.Documents.Add()
         try:
@@ -81,7 +73,7 @@ class FileGenerator:
         except Exception as e:
             print(e)
         try:
-            myFile = r'C:\Users\ray3n\Desktop' + '\\' + month
+            myFile = self.__destination + '\\' + self.__month
             if not os.path.exists(myFile):
                 os.makedirs(myFile)
             myFile = myFile + '\\' + filename
@@ -92,8 +84,8 @@ class FileGenerator:
             print("An error occurred while generating indd files.")
             traceback.print_exc()
 
-    def parse_file_properties(self, data):
-        for city in data['cities']:
+    def parse_file_properties(self):
+        for city in self.__data['cities']:
             for event in city['events']:
                 formats = ""
                 self.__fileformats.append([])
