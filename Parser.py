@@ -18,7 +18,7 @@ class Parser:
     __month = None
     __full_data = {}
     __cities = ['ldz', 'rz', 'tor']
-    __col_names = ['date', 'title', 'format', 'state', 'info', 'comment']
+    __col_names = ['date', 'title', 'format', 'properties', 'info', 'comment']
 
     def __init__(self, path):
         self.__infile = path

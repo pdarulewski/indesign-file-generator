@@ -23,9 +23,9 @@ def main():
     indd_generator.parse_file_properties()
     indd_generator.generate_indd_files()
 
-    schedule_generator = ScheduleGenerator(data)
-    schedule_generator.generate_txt_schedules(data, args['destination'])
-    schedule_generator.generate_schedules(data, args['destination'])
+    schedule_generator = ScheduleGenerator(data, args['destination'])
+    schedule_generator.generate_txt_schedules()
+    schedule_generator.generate_schedules()
 
 
 if __name__ == "__main__":

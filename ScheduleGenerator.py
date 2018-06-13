@@ -22,7 +22,10 @@ class ScheduleGenerator:
             for event in city['events']:
                 content += event['date'] + "_" + event['title'] + u'\r\n'
             try:
-                with open(self.__destination + "\\Schedules\\" + city['city'] + '.txt', 'wb') as out:
+                myFile = self.__destination + "\\Schedules\\"
+                if not os.path.exists(myFile):
+                    os.makedirs(myFile)
+                with open(myFile + city['city'] + '.txt', 'wb') as out:
                     out.write(content.encode('utf8'))
                     logger.warning('%s', 'Schedule was generated for: ' + city['city'])
             except Exception:
