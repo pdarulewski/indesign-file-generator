@@ -55,7 +55,7 @@ class Parser:
                                 formats.append(shape)
                             rows[self.__col_names[prop]] = formats
                         else:
-                            rows[self.__col_names[prop]] = cell.value
+                            rows[self.__col_names[prop]] = str(cell.value)
                         prop += 1
 
                     events.append(rows)
