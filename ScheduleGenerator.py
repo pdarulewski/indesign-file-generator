@@ -20,7 +20,7 @@ class ScheduleGenerator:
         for city in self.__data['cities']:
             content = ""
             for event in city['events']:
-                content += event['date'] + "_" + event['title'] + u'\r\n'
+                content += str(event['date']) + "_" + event['title'] + u'\r\n'
             try:
                 myFile = self.__destination + "\\Schedules\\"
                 if not os.path.exists(myFile):

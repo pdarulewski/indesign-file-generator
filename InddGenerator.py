@@ -93,6 +93,6 @@ class InddGenerator:
                     self.__fileformats[-1].append(shape)
                     formats += shape + "_"
                 self.__filenames.append(
-                    event['date'].replace(".", "_") + "_" + event['title'].replace(" ", "_") +
+                    str(event['date']).replace(".", "_") + "_" + event['title'].replace(" ", "_") +
                     "_" + formats + city['city'] + ".indd")
         
