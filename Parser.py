@@ -65,9 +65,8 @@ class Parser:
                 counter += 1
                 self.__full_data['cities'].append(city)
             pprint(self.__full_data)
-            # logger.warning('%s', self.__full_data)
         except Exception:
-            print("Data was not parsed.")
+            logger.critical("Data was not parsed.")
             traceback.print_exc()
             sys.exit()
 
@@ -80,10 +79,10 @@ class Parser:
 
             with open(filename, 'w') as outfile:
                 json.dump(self.__full_data, outfile)
-            logger.warning('%s', "JSON was saved.")
+            logger.info('%s', "JSON was saved.")
 
         except Exception:
-            print("Data was not parsed.")
+            logger.critical("Data was not parsed.")
             traceback.print_exc()
             sys.exit()
 
