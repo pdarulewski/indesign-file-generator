@@ -33,7 +33,7 @@ class Parser:
             wb = load_workbook(filename=self.__infile, read_only=True)
             logger.info('%s', 'Workbook was read.')
         except Exception:
-            logger.critical("File was not read.")
+            logger.error("File was not read.")
             traceback.print_exc()
             sys.exit()
 
@@ -66,7 +66,7 @@ class Parser:
                 self.__full_data['cities'].append(city)
             pprint(self.__full_data)
         except Exception:
-            logger.critical("Data was not parsed.")
+            logger.error("Data was not parsed.")
             traceback.print_exc()
             sys.exit()
 
@@ -82,7 +82,7 @@ class Parser:
             logger.info('%s', "JSON was saved.")
 
         except Exception:
-            logger.critical("Data was not parsed.")
+            logger.error("Data was not parsed.")
             traceback.print_exc()
             sys.exit()
 
