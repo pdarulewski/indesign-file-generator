@@ -26,9 +26,9 @@ class InddGenerator:
             app = client.Dispatch('InDesign.Application.CC.2018')
             for filename, fileformat in zip(self.__filenames, self.__fileformats):
                 self.__generate_indd_file(filename, fileformat, app)
-            logger.warning('%s', 'All indd files was generated.')
+            logger.info('%s', 'All indd files were generated.')
         except Exception:
-            print("An error occurred while generating indd files.")
+            logger.critical("An error occurred while generating indd files.")
             traceback.print_exc()
             sys.exit()
 
@@ -79,9 +79,9 @@ class InddGenerator:
             myFile = myFile + '\\' + filename
             myDocument = myDocument.Save(myFile)
             myDocument.Close()
-            logger.warning('%s', myFile + ' was generated.')
+            logger.info('%s', myFile + ' was generated.')
         except Exception:
-            print("An error occurred while generating indd files.")
+            logger.critical("An error occurred while generating indd files.")
             traceback.print_exc()
 
     def parse_file_properties(self):
