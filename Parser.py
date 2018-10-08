@@ -1,15 +1,17 @@
-from openpyxl import load_workbook
-import os
-import sys
-from pprint import pprint
 import json
-import re
-import traceback
 import logging
+import os
+import re
+import sys
+import traceback
+from pprint import pprint
+
+from openpyxl import load_workbook
 
 FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(format=FORMAT)
 logger = logging.getLogger('parser')
+logger.setLevel(logging.DEBUG)
 
 class Parser:
 
@@ -31,9 +33,9 @@ class Parser:
     def read_from_file(self):
         try:
             wb = load_workbook(filename=self.__infile, read_only=True)
-            logger.warning('%s', 'Workbook was read.')
+            logger.info('%s', 'Workbook was read.')
         except Exception:
-            print("File was not read.")
+            logger.error("File was not read.")
             traceback.print_exc()
             sys.exit()
 
@@ -65,25 +67,8 @@ class Parser:
                 counter += 1
                 self.__full_data['cities'].append(city)
             pprint(self.__full_data)
-            # logger.warning('%s', self.__full_data)
+            
         except Exception:
-            print("Data was not parsed.")
+            logger.error("Data was not parsed.")
             traceback.print_exc()
             sys.exit()
-
-    def write_to_json(self, outfile):
-        pattern = re.compile(r'.*(?=\.)')
-        self.__month = re.match(pattern, self.__filename)
-        try:
-            filename = 'Data\\' + self.__month.group() + '.json'
-            os.makedirs(os.path.dirname(filename), exist_ok=True)
-
-            with open(filename, 'w') as outfile:
-                json.dump(self.__full_data, outfile)
-            logger.warning('%s', "JSON was saved.")
-
-        except Exception:
-            print("Data was not parsed.")
-            traceback.print_exc()
-            sys.exit()
-

@@ -31,10 +31,3 @@ class ScheduleGenerator:
             except Exception:
                 print("File was not written.")
                 traceback.print_exc()
-
-    def generate_schedules(self):
-        # TODO:
-        # find previous files
-        # make copy of them
-        # rename
-        pass
