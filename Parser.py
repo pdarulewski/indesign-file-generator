@@ -31,9 +31,9 @@ class Parser:
     def read_from_file(self):
         try:
             wb = load_workbook(filename=self.__infile, read_only=True)
-            logger.warning('%s', 'Workbook was read.')
+            logger.info('%s', 'Workbook was read.')
         except Exception:
-            print("File was not read.")
+            logger.critical("File was not read.")
             traceback.print_exc()
             sys.exit()
 
