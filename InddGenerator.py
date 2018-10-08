@@ -28,7 +28,7 @@ class InddGenerator:
                 self.__generate_indd_file(filename, fileformat, app)
             logger.info('%s', 'All indd files were generated.')
         except Exception:
-            logger.critical("An error occurred while generating indd files.")
+            logger.error("An error occurred while generating indd files.")
             traceback.print_exc()
             sys.exit()
 
